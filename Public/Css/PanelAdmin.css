@@ -1,0 +1,169 @@
+/* Admin.css - Dashboard de Administración */
+
+.admin-dashboard {
+    /*background-color: var(--oaxaca-cream);*/
+    background: linear-gradient(135deg, var(--oaxaca-cream) 0%, #EFE8DF 100%);
+    min-height: 100vh;
+}
+
+.admin-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 280px;
+    background-color: var(--oaxaca-dark);
+    color: var(--oaxaca-cream);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+}
+
+.admin-brand {
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(250, 245, 237, 0.05);
+}
+
+.admin-nav {
+    padding: 20px 10px;
+    flex-grow: 1;
+}
+
+.admin-nav-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    color: var(--oaxaca-sand);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.admin-nav-btn:hover {
+    background: rgba(201, 168, 76, 0.1);
+    color: var(--oaxaca-gold);
+}
+
+.admin-nav-btn.active {
+    background-color: var(--oaxaca-red);
+    color: #fff;
+}
+
+.admin-footer-link {
+    padding: 20px;
+    border-top: 1px solid rgba(250, 245, 237, 0.05);
+}
+
+/* Contenido Principal */
+.admin-content {
+    flex-grow: 1;
+    position: relative;
+    padding: 40px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+.admin-pane {
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-pane.active {
+    display: block;
+}
+
+.admin-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+/* Tabla de Usuarios */
+.table-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--oaxaca-sand);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    overflow: hidden;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.admin-table th {
+    background-color: var(--oaxaca-sand);
+    color: var(--oaxaca-brown);
+    padding: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.admin-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--oaxaca-dark);
+}
+
+.admin-table tr:hover {
+    background-color: #fafafa;
+}
+
+.badge {
+    background: var(--oaxaca-forest);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Botones de Acción */
+.action-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    border: none;
+    background: var(--oaxaca-cream);
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-edit:hover { background: var(--oaxaca-gold); color: white; }
+.btn-delete:hover { background: var(--oaxaca-red); color: white; }
+
+/* Estilos de Formulario en Modal */
+.contact-form-styled .form-group label {
+    color: var(--oaxaca-brown);
+    font-weight: 600;
+}
+
+.contact-form-styled input, .contact-form-styled select {
+    background-color: #fff;
+    border: 1px solid var(--oaxaca-sand);
+    color: var(--oaxaca-dark);
+}

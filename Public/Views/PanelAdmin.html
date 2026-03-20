@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Lenguas Vivas de Oaxaca</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../Public/Css/Global.css?v=1.0">
+    <link rel="stylesheet" href="../../Public/Css/PanelAdmin.css?v=1.0">
+</head>
+
+<body>
+
+    <section class="admin-dashboard" id="admin-panel">
+        <div class="admin-container">
+            <aside class="admin-sidebar">
+                <div class="zapotec-border-thin"></div>
+                <div class="admin-brand">
+                    <div class="nav-logo-icon">👑</div>
+                    <div>
+                        <span class="nav-logo-text">Admin</span>
+                        <span class="nav-logo-sub">Panel de Control</span>
+                    </div>
+                </div>
+
+                <nav class="admin-nav">
+                    <button class="admin-nav-btn active" data-target="users-section">
+                        <span class="admin-icon">👥</span> Usuarios
+                    </button>
+                    <button class="admin-nav-btn" data-target="roles-section">
+                        <span class="admin-icon">🛡️</span> Roles
+                    </button>
+                </nav>
+
+                <div class="admin-footer-link">
+                    <a href="/" class="nav-link">⬅ Cerrar Sesión</a>
+                </div>
+            </aside>
+
+            <main class="admin-content">
+                <div class="greca-pattern"></div>
+
+                <div id="users-section" class="admin-pane active">
+                    <div class="admin-header-flex">
+                        <div>
+                            <div class="section-tag">Gestión</div>
+                            <h2>Control de Usuarios</h2>
+                        </div>
+                        <button class="btn-primary" id="openCreateModal">
+                            <span>+</span> Nuevo Usuario
+                        </button>
+                    </div>
+
+                    <div class="table-wrapper fade-in is-visible">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Correo</th>
+                                    <th>Contraseña</th>
+                                    <th>Teléfono</th>
+                                    <th>Institución</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="roles-section" class="admin-pane">
+                    <div class="section-tag">Configuración</div>
+                    <h2>Gestión de Roles</h2>
+                    <p>Esta sección se encuentra actualmente en desarrollo.</p>
+                </div>
+            </main>
+        </div>
+
+        <div id="userModal" class="login-modal">
+            <div class="login-box">
+                <div class="login-accent"></div>
+                <button class="close-modal" id="closeModal" aria-label="Cerrar">&times;</button>
+                <div class="login-body">
+                    <h2 id="modalTitle">Nuevo Usuario</h2>
+                    <p class="login-sub">Completa los campos para el registro</p>
+
+                    <form id="userForm" class="contact-form-styled">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userName">Nombre</label>
+                                <input type="text" id="userName" placeholder="Ej. Juan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userLastName">Apellido</label>
+                                <input type="text" id="userLastName" placeholder="Ej. Pérez" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Correo Electrónico</label>
+                            <input type="email" id="userEmail" placeholder="correo@ejemplo.com" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userPass">Contraseña</label>
+                                <input type="password" id="userPass" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userPhone">Teléfono</label>
+                                <input type="tel" id="userPhone" placeholder="951 000 0000">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userInst">Institución</label>
+                            <input type="text" id="userInst" placeholder="Nombre de la institución">
+                        </div>
+                        <div class="form-group">
+                            <label for="userRol">Rol</label>
+                            <select id="userRol">
+                                <option value="Administrador">Administrador</option>
+                                <option value="Especialista">Especialista</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-submit">Guardar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../../Public/Js/PanelAdmin.js?v=1.0"></script>
+</body>
+
+</html>

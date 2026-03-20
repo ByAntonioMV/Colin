@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración</title>
+    <link rel="stylesheet" href="../../Public/Css/Global.css?v=1.0">
+    <link rel="stylesheet" href="../../Public/Css/PanelCospus.css?v=1.0">
+</head>
+
+<body>
+    <div class="spec-layout">
+        <header class="spec-header">
+            <div class="header-inner">
+                <div class="app-brand">
+                    Colin <span class="brand-subtitle">| Colección de lenguas indígenas</span>
+                </div>
+
+                <div class="header-title-container">
+                    <div class="header-decoration left"></div>
+                    <h1>Administración de los Corpus</h1>
+                    <div class="header-decoration right"></div>
+                </div>
+
+                <div class="logout-wrapper">
+                    <button class="logout-pill" onclick="cerrarSesion()">
+                        <span>logout</span> Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="spec-content">
+            <div class="greca-pattern"></div>
+            <div class="content-container">
+                <div class="content-top-bar">
+                    <div class="text-group">
+                        <h2>Selecciona el corpus que deseas administrar</h2>
+                    </div>
+                    <button id="btnNuevoCorpus" class="btn-add-corpus">Nuevo Corpus</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Lengua</th>
+                                <th>Variante</th>
+                                <th>Estado</th>
+                                <th>Municipio</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpusTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <footer class="admin-footer">
+            <div class="footer-info">
+                <p>© 2026 Colección de lenguas indigenas | TCA</p>
+            </div>
+            <div class="zapotec-border"></div>
+        </footer>
+    </div>
+
+    <div class="login-modal" id="modalCorpus">
+        <div class="login-box">
+            <div class="zapotec-border-thin"></div>
+            <button class="close-modal" id="closeModalCorpus">&times;</button>
+            <div class="login-body">
+                <h2>Nuevo Corpus</h2>
+                <p class="login-sub">Ingresa los datos del nuevo registro cultural</p>
+
+                <form id="formCorpus">
+                    <div class="form-group">
+                        <label>Nombre del Corpus</label>
+                        <input type="text" id="corpusNombre" placeholder="Ej: Cantos Tradicionales" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <input type="text" id="corpusTipo" placeholder="Ej: Oral" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Lengua</label>
+                            <input type="text" id="corpusLengua" placeholder="Ej: Mixteco" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Variante de la lengua</label>
+                        <input type="text" id="corpusVariante" placeholder="Variante regional" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <input type="text" id="corpusEstado" placeholder="Ej: Oaxaca" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            <input type="text" id="corpusMunicipio" placeholder="Municipio sede" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">Guardar Corpus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../../Public/Js/PanelCospus.js?v=1.0"></script>
+</body>
+
+</html>

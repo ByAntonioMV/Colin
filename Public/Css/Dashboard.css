@@ -1,0 +1,116 @@
+/* ===== DASHBOARD FULL WIDTH STYLES ===== */
+
+.dashboard-section {
+  padding: 72px 0 0 0; /* Ajustado a la altura de tu nav global */
+  background-color: var(--oaxaca-cream);
+  width: 100%;
+}
+
+.dashboard-container {
+  display: flex;
+  width: 100%; /* Ocupa todo el ancho */
+  height: calc(100vh - 72px); /* Ocupa todo el alto sobrante de la pantalla */
+  background: #fff;
+  border-top: 1px solid var(--oaxaca-sand);
+  overflow: hidden;
+}
+
+/* Sidebar Robusta */
+.dash-sidebar {
+  width: 320px; /* Un poco más ancho para mayor presencia */
+  background-color: var(--oaxaca-dark);
+  color: var(--oaxaca-cream);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.sidebar-header {
+  padding: 40px 30px;
+  border-bottom: 1px solid rgba(250, 245, 237, 0.05);
+}
+
+.lang-selector {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px 15px;
+  background: rgba(250, 245, 237, 0.05);
+  border: 1px solid var(--oaxaca-gold);
+  color: var(--oaxaca-gold);
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  outline: none;
+}
+
+.dash-nav {
+  padding: 20px 10px;
+}
+
+.dash-nav-btn {
+  width: 100%;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  color: var(--oaxaca-sand);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dash-nav-btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--oaxaca-gold);
+}
+
+.dash-nav-btn.active {
+  background: var(--oaxaca-red);
+  color: var(--oaxaca-cream);
+}
+
+/* Área de Contenido Principal */
+.dash-main-content {
+  flex-grow: 1;
+  position: relative;
+  /* Reducimos el padding de 60px a 40px arriba y 20px a los lados */
+  padding: 40px 25px; 
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.dash-pane {
+  display: none;
+  /* Eliminamos max-width y margin: 0 auto para que se pegue a la izquierda */
+  width: 100%; 
+  text-align: left;
+}
+.dash-pane h2 {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: var(--oaxaca-dark);
+}
+
+.dash-pane.active {
+  display: block;
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-10px); } /* Cambiado a leve deslizamiento lateral */
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsivo para tablets */
+@media (max-width: 960px) {
+  .dash-sidebar { width: 260px; }
+  .dash-main-content { padding: 30px; }
+}

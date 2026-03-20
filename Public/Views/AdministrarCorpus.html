@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Administración</title>
+  <link rel="stylesheet" href="../../Public/Css/Global.css">
+  <link rel="stylesheet" href="../../Public/Css/AdministrarCorpus.css">
+  <link rel="stylesheet" href="../../Public/Css/Graficas.css">
+</head>
+
+<body>
+
+  <div class="dashboard-wrapper">
+
+    <aside class="dash-sidebar">
+      <div class="dash-logo">
+        <div class="nav-logo-icon">LV</div>
+        <div>
+          <div class="nav-logo-text">Dashboard</div>
+          <div class="nav-logo-sub">Colin</div>
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <button class="dash-nav-btn active" data-target="corpus">
+          Alimentar Corpus
+        </button>
+        <button class="dash-nav-btn" data-target="stats">
+          Estadísticas Generales
+        </button>
+        <button class="dash-nav-btn" data-target="viz">
+          Visualización
+        </button>
+      </nav>
+
+      <div class="dash-logout-wrapper">
+        <button class="dash-logout-btn">
+          Cerrar Sesión
+        </button>
+      </div>
+
+      <div class="greca-pattern" style="opacity: 0.05;"></div>
+    </aside>
+
+    <main class="dash-content">
+      <div class="zapotec-border-thin"></div>
+
+      <header class="dash-header">
+        <h2 id="tituloCorpus"></h2>
+        </h2>
+      </header>
+
+      <section id="corpus" class="dash-panel active fade-in is-visible">
+        <div class="section-tag">Gestión de Datos</div>
+        <h3>Alimentar Corpus</h3>
+        <p>Sube archivos de texto plano como son .txt o .csv</p>
+
+        <div class="upload-container">
+          <div class="upload-area" id="drop-zone">
+            <div class="upload-icon">📄</div>
+            <h4>Arrastra tus archivos aquí</h4>
+            <p>o</p>
+            <label for="file-upload" class="btn-outline upload-btn">
+              Seleccionar Archivos
+            </label>
+            <input type="file" id="file-upload" accept=".txt,.csv" multiple class="sr-only">
+
+            <p class="upload-hints">Formatos soportados: .txt, .csv</p>
+          </div>
+        </div>
+        <div id="nlp-results-panel" class="nlp-results-wrapper" style="display: none;">
+          <div class="nlp-results-header">
+            <h4><span class="icon-success">✅</span> Procesamiento NLP Completado</h4>
+            <p>Los archivos han sido procesados y guardados en Hadoop.</p>
+          </div>
+
+          <div class="nlp-stats-grid">
+            <div class="nlp-stat-card">
+              <span class="stat-label">Líneas Procesadas</span>
+              <span class="stat-value" id="res-lineas">--</span>
+            </div>
+            <div class="nlp-stat-card">
+              <span class="stat-label">Total Tokens</span>
+              <span class="stat-value" id="res-tokens">--</span>
+            </div>
+            <div class="nlp-stat-card">
+              <span class="stat-label">Archivos Generados</span>
+              <span class="stat-value" id="res-archivos">3</span>
+            </div>
+          </div>
+
+          <div class="nlp-pos-section">
+            <h5>Distribución Morfológica (Lematización)</h5>
+            <ul class="nlp-pos-list" id="res-pos-list">
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="stats" class="dash-panel fade-in">
+        <div class="section-tag">Análisis</div>
+        <h3>Estadísticas Generales del corpus</h3>
+        <p>Resumen y métricas del corpus lingüístico almacenado.</p>
+
+        <div class="stats-dashboard">
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-title">Total Tokens</span>
+              <span class="kpi-value">187,503</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Palabras Únicas</span>
+              <span class="kpi-value">13,610</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Lemas Únicos</span>
+              <span class="kpi-value">8,632</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Longitud Promedio</span>
+              <span class="kpi-value">6.17 <small>letras</small></span>
+            </div>
+          </div>
+
+          <div class="charts-grid">
+
+            <div class="chart-card">
+              <h4>Distribución Gramatical (POS)</h4>
+              <div class="canvas-container">
+                <div id="posDonutChart" style="width: 100%; height: 100%;"></div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Top 10 Verbos Más Frecuentes</h4>
+              <div class="canvas-container">
+                <div id="verbsBarChart" style="width: 100%; height: 100%;"></div>
+              </div>
+            </div>
+
+            <div class="chart-card full-width">
+              <h4>Frecuencia por Categoría Gramatical</h4>
+              <div class="canvas-container area-container">
+                <div id="posBarRotationChart" style="width: 100%; height: 100%;"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="viz" class="dash-panel fade-in">
+        <div class="section-tag">Exploración</div>
+        <h3>Visualización de Datos</h3>
+        <p>Herramientas interactivas para explorar las relaciones y frecuencias lingüísticas.</p>
+
+        <div class="placeholder-box">
+          <p>Espacio reservado para insertar mapas de red, nubes de palabras o mapas interactivos.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="../../Public/Js/AdministrarCorpus.js"></script>
+  <script src="../../Public/Js/AdministrarCorpusFunciones.js"></script>
+  <script src="../../Public/Js/Graficas.js"></script>
+</body>
+
+</html>
