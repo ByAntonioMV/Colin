@@ -4,11 +4,10 @@ from typing import List
 from App.Config.DB import get_db
 from App.Services.CorpusService import CorpusService
 from App.Services.AutenticacionService import AutenticacionService
-from App.Services.DatosHadoopService import DatosHadoopService
 
 # Prefijo para todas las rutas de este archivo
 router = APIRouter(prefix="/api/corpus", tags=["Corpus"])
-stats_service = DatosHadoopService()
+
 # ==========================================
 # CREAR CORPUS (BD + HDFS)
 # ==========================================
@@ -82,10 +81,3 @@ async def subir_archivos(
     # Como nuestro servicio es 'async' (porque usamos await archivo.read()), aquí SÍ lleva 'await'
     return await CorpusService.subir_archivos_hdfs(hash_carpeta, archivos)
 
-# ==============================================
-# GRAFICAR CON LOS ARCHIVOS QUE ESTAN EN HADOOP
-# ==============================================
-@router.get("/graficas/{hash_carpeta}")
-async def obtener_graficas(hash_carpeta: str):
-    resultado = stats_service.obtener_datos_graficas(hash_carpeta)
-    return resultado

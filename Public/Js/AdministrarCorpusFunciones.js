@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         void targetPanel.offsetWidth;
         targetPanel.classList.add('is-visible');
         if (target === 'stats') {
-          cargarDatosGraficas();
+          obtenerDatosDesdeAPI();
         }
       }
     });
@@ -223,215 +223,45 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('[Dashboard] Inicializado correctamente');
 });
 
-// Variables globales para las instancias de ECharts
-let posChart, verbsChart, posRotationChart;
+export async function obtenerDatosDesdeAPI(hashCorpus) {
+  if (!hashCorpus || hashCorpus === "undefined") {
+    const urlParams = new URLSearchParams(window.location.search);
+    hashCorpus = urlParams.get('hash');
+  }
 
-async function cargarDatosGraficas() {
-  const parametrosURL = new URLSearchParams(window.location.search);
-  const hashCorpus = parametrosURL.get('hash');
-
-  if (!hashCorpus) return;
+  if (!hashCorpus) {
+    console.error("El hash proporcionado no es válido y no se encontró en la URL.");
+    return null;
+  }
 
   try {
-    const response = await fetch(`/api/corpus/graficas/${hashCorpus}`);
-    const result = await response.json();
+    // 🔑 CORREGIDO: usar la misma clave que en login
+    const token = localStorage.getItem("access_token");
 
-    if (result.status === 'success') {
-      const data = result.data;
+    console.log("Token enviado:", token);
 
-      // 1. ACTUALIZAR KPIs
-      const kpiValues = document.querySelectorAll('#stats .kpi-value');
-      if (kpiValues.length >= 4) {
-        kpiValues[0].innerText = data.kpis["Total Tokens"]?.toLocaleString() || "0";
-        kpiValues[1].innerText = data.kpis["Total Tipos (Palabras unicas)"]?.toLocaleString() || "0";
-        kpiValues[2].innerText = data.kpis["Total Lemas Unicos"]?.toLocaleString() || "0";
-        kpiValues[3].innerHTML = `${data.kpis["Longitud Promedio de Palabra"] || 0} <small>letras</small>`;
-      }
-
-      // 2. COLORES OAXACA
-      const oaxacaRed = '#8B2E16';
-      const oaxacaForest = '#2D5A3D';
-      const oaxacaGold = '#D9A05B';
-      const oaxacaDark = '#1A0F0A';
-      const oaxacaBlue = '#3b5998';
-      const paletaPos = [oaxacaRed, oaxacaForest, oaxacaGold, oaxacaDark, oaxacaBlue, '#A8DADC'];
-
-      // 3. LIMPIAR E INICIALIZAR CONTENEDORES (Una sola vez)
-      if (posChart) posChart.dispose();
-      if (verbsChart) verbsChart.dispose();
-      if (posRotationChart) posRotationChart.dispose();
-
-      posChart = echarts.init(document.getElementById('posDonutChart'));
-      verbsChart = echarts.init(document.getElementById('verbsBarChart'));
-      posRotationChart = echarts.init(document.getElementById('posBarRotationChart'));
-
-      // =========================================================
-      // GRÁFICA 1: Pie with Scrollable Legend
-      // =========================================================
-      const posData = data.pos.labels.map((label, index) => ({
-        name: label,
-        value: data.pos.values[index]
-      }));
-
-      posChart.setOption({
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          type: 'scroll',
-          orient: 'vertical',
-          right: 10,
-          top: 20,
-          bottom: 20,
-          data: data.pos.labels
-        },
-        color: paletaPos,
-        series: [
-          {
-            name: 'Categoría (POS)',
-            type: 'pie',
-            radius: '55%',
-            center: ['40%', '50%'],
-            data: posData,
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
-      });
-
-      // =========================================================
-      // GRÁFICA 2: Estilo "Rainfall and Evaporation" (Top Verbos)
-      // =========================================================
-      verbsChart.setOption({
-        tooltip: { trigger: 'axis' },
-        legend: { data: ['Frecuencia'] },
-        toolbox: {
-          show: true,
-          feature: {
-            dataView: { show: true, readOnly: false, title: 'Datos' },
-            magicType: { show: true, type: ['line', 'bar'], title: { line: 'Línea', bar: 'Barra' } },
-            restore: { show: true, title: 'Restaurar' },
-            saveAsImage: { show: true, title: 'Guardar' }
-          }
-        },
-        calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            data: data.top_verbos.labels
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: 'Frecuencia',
-            type: 'bar',
-            data: data.top_verbos.values,
-            itemStyle: { color: oaxacaRed },
-            markPoint: {
-              data: [
-                { type: 'max', name: 'Máximo' },
-                { type: 'min', name: 'Mínimo' }
-              ]
-            },
-            markLine: {
-              data: [{ type: 'average', name: 'Promedio' }]
-            }
-          }
-        ]
-      });
-
-      // =========================================================
-      // GRÁFICA 3: Bar Label Rotation (Frecuencias POS)
-      // =========================================================
-      const labelOption = {
-        show: true,
-        position: 'insideBottom',
-        distance: 15,
-        align: 'left',
-        verticalAlign: 'middle',
-        rotate: 90,
-        formatter: '{c}',
-        fontSize: 14,
-        color: '#ffffff',
-        rich: { name: {} }
-      };
-
-      posRotationChart.setOption({
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { type: 'shadow' }
-        },
-        legend: {
-          data: ['Frecuencia']
-        },
-        toolbox: {
-          show: true,
-          orient: 'vertical',
-          left: 'right',
-          top: 'center',
-          feature: {
-            mark: { show: true },
-            dataView: { show: true, readOnly: false, title: 'Datos' },
-            magicType: { show: true, type: ['line', 'bar', 'stack'], title: { line: 'Línea', bar: 'Barra', stack: 'Apilar' } },
-            restore: { show: true, title: 'Restaurar' },
-            saveAsImage: { show: true, title: 'Guardar' }
-          }
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '15%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'category',
-            axisTick: { show: false },
-            data: data.pos.labels,
-            axisLabel: {
-              rotate: 45,
-              fontSize: 13
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: 'Frecuencia',
-            type: 'bar',
-            barGap: 0,
-            label: labelOption,
-            emphasis: { focus: 'series' },
-            itemStyle: { color: oaxacaBlue },
-            data: data.pos.values
-          }
-        ]
-      });
-
+    if (!token) {
+      console.error("No hay token. Usuario no autenticado.");
+      return null;
     }
+
+    const response = await fetch(`/api/datos-hadoop/graficas/${hashCorpus}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status} en la ruta /api/datos-hadoop/graficas/${hashCorpus}`);
+    }
+
+    const result = await response.json();
+    return (result.status === 'success') ? result.data : null;
+
   } catch (error) {
-    console.error("Error cargando gráficas ECharts:", error);
+    console.error("Error en la petición:", error);
+    return null;
   }
 }
-
-// Redimensionar gráficos si cambia el tamaño de la ventana
-window.addEventListener('resize', function () {
-  if (posChart) posChart.resize();
-  if (verbsChart) verbsChart.resize();
-  if (posRotationChart) posRotationChart.resize();
-});

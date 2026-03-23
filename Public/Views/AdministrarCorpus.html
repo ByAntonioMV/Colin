@@ -30,6 +30,9 @@
         <button class="dash-nav-btn" data-target="stats">
           Estadísticas Generales
         </button>
+        <button class="dash-nav-btn" data-target="stats-special">
+          Estadísticas Detalladas
+        </button>
         <button class="dash-nav-btn" data-target="viz">
           Visualización
         </button>
@@ -147,8 +150,16 @@
                 <div id="posBarRotationChart" style="width: 100%; height: 100%;"></div>
               </div>
             </div>
-
           </div>
+        </div>
+      </section>
+
+      <section id="stats-special" class="dash-panel fade-in">
+        <div class="section-tag">Datos</div>
+        <h3>Estadisticas especificas</h3>
+        <p>Herramientas interactivas para explorar las relaciones y frecuencias lingüísticas.</p>
+        <div class="placeholder-box">
+          <p>Espacio reservado para la tabla detallada</p>
         </div>
       </section>
 
@@ -166,9 +177,9 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-  <script src="../../Public/Js/AdministrarCorpus.js"></script>
-  <script src="../../Public/Js/AdministrarCorpusFunciones.js"></script>
-  <script src="../../Public/Js/Graficas.js"></script>
+  <script type="module" src="../../Public/Js/AdministrarCorpus.js"></script>
+  <script type="module" src="../../Public/Js/AdministrarCorpusFunciones.js"></script>
+  <script type="module" src="../../Public/Js/Graficas.js"></script>
 </body>
 
 </html>
