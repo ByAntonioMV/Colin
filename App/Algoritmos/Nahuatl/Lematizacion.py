@@ -3,11 +3,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-# ──────────────────────────────────────────────
-# 1.  STOPWORDS DEL NÁHUATL
-#     (partículas, pronombres, conjunciones,
-#      preposiciones, adverbios no-lematizables)
-# ──────────────────────────────────────────────
+
 STOPWORDS_NAHUATL: set[str] = {
     # pronombres personales
     "nej", "tejwan", "yej", "yejwan", "namejwan", "amejwan",

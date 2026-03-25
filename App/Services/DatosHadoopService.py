@@ -141,3 +141,60 @@ class DatosHadoopService:
             "status": "success", 
             "data": datos_limpios
         }
+    
+    # =========================================================
+    # 4. FUNCIÓN PARA OBTENER DATOS DE LA TABLA ESPECÍFICA
+    # =========================================================
+    @staticmethod
+    def obtener_datos_tabla(hash_carpeta: str, limite: int = 1000):
+        # Traemos toda la base combinada en formato DataFrame
+        df_master = DatosHadoopService.obtener_todos_los_lemas(hash_carpeta, return_df=True)
+        
+        if df_master.empty:
+            return {"status": "error", "message": "No hay datos disponibles para la tabla."}
+            
+        # 1. Extraer solo las columnas que necesitamos para la tabla
+        # Asumimos que la columna 'tipo' tiene la información morfológica
+        df_tabla = df_master[['palabra', 'lema', 'categoria', 'tipo', 'frecuencia']].copy()
+        
+        # 2. Ordenar por frecuencia (los más altos primero) y aplicar el límite
+        df_tabla = df_tabla.sort_values(by='frecuencia', ascending=False).head(limite)
+        
+        # 3. Renombrar las columnas para que el JSON sea idéntico a lo que espera el JS
+        df_tabla.rename(columns={
+            'palabra': 'token',
+            'categoria': 'pos',
+            'tipo': 'morfologia'
+        }, inplace=True)
+        
+        # 4. Limpiar posibles valores nulos (NaN a string vacío)
+        df_tabla.fillna('', inplace=True)
+        
+        return {
+            "status": "success", 
+            "data": df_tabla.to_dict(orient='records')
+        }
+    
+    # =========================================================
+    # 5. FUNCIÓN PARA LA NUBE DE PALABRAS
+    # =========================================================
+    @staticmethod
+    def obtener_datos_nube(hash_carpeta: str, limite: int = 150):
+        # Traemos la base de lemas
+        df_master = DatosHadoopService.obtener_todos_los_lemas(hash_carpeta, return_df=True)
+        
+        if df_master.empty:
+            return {"status": "error", "message": "No hay datos para la nube de palabras."}
+            
+        # Agrupamos por lema y sumamos frecuencias
+        df_agrupado = df_master.groupby('lema')['frecuencia'].sum().reset_index()
+        # Tomamos el top N
+        df_agrupado = df_agrupado.sort_values(by='frecuencia', ascending=False).head(limite)
+        
+        # Renombramos para que ECharts lo entienda mágicamente (name y value)
+        df_agrupado.rename(columns={'lema': 'name', 'frecuencia': 'value'}, inplace=True)
+        
+        return {
+            "status": "success", 
+            "data": df_agrupado.to_dict(orient='records')
+        }

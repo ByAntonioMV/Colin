@@ -67,7 +67,7 @@ async def obtener_datos_completos_graficas(
 
         return {
             "status": "success",
-            "data": {   # 🔥 AHORA TODO VIENE EN data
+            "data": { 
                 "kpis": data["kpis"],
                 "pos": data["pos"],
                 "top_verbos": data["top_verbos"],
@@ -101,5 +101,34 @@ async def obtener_resumen_kpis(
             }
         }
 
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+    
+@router.get("/tabla/{hash_corpus}")
+def get_tabla_especifica(hash_corpus: str, limite: int = 1000):
+    try:
+        # Nota: Aquí puedes inyectar/validar tu token de acceso si es necesario
+        resultado = DatosHadoopService.obtener_datos_tabla(hash_corpus, limite)
+        
+        if resultado.get("status") == "error":
+            raise HTTPException(status_code=404, detail=resultado["message"])
+            
+        return resultado
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@router.get("/nube/{hash_corpus}")
+async def get_nube_palabras(
+    hash_corpus: str, 
+    limite: int = 150,
+    db: Session = Depends(get_db),
+    current_user = Depends(AutenticacionService.get_especialista_user)
+):
+    try:
+        resultado = DatosHadoopService.obtener_datos_nube(hash_corpus, limite)
+        if resultado.get("status") == "error":
+            raise HTTPException(status_code=404, detail=resultado["message"])
+        return resultado
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

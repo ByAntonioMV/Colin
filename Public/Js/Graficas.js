@@ -30,20 +30,33 @@ export async function inicializarEstadisticas(hashCorpus) {
         const data = await obtenerDatosDesdeAPI(hashCorpus);
 
         if (data) {
-            // 1. Actualizar KPIs (Cards)
+            
             actualizarKPIs(data.kpis);
 
-            // 2. Renderizar cada gráfica
             renderDonutPOS(data.pos);
             renderBarVerbos(data.top_verbos);
             renderBarRotationPOS(data.pos);
 
-            // 3. Manejar redimensionamiento
+            const statsPanel = document.getElementById('stats');
+            if (statsPanel) {
+                const resizeObserver = new ResizeObserver(() => {
+                    // Forzamos a ECharts a recalcular su tamaño
+                    if (posDonutChart) posDonutChart.resize();
+                    if (verbsBarChart) verbsBarChart.resize();
+                    if (posBarRotationChart) posBarRotationChart.resize();
+                });
+
+                // Empezamos a observar el panel
+                resizeObserver.observe(statsPanel);
+            }
+
+            // Mantenemos también el del window por si el usuario redimensiona el navegador
             window.addEventListener('resize', () => {
-                posDonutChart?.resize();
-                verbsBarChart?.resize();
-                posBarRotationChart?.resize();
+                if (posDonutChart) posDonutChart.resize();
+                if (verbsBarChart) verbsBarChart.resize();
+                if (posBarRotationChart) posBarRotationChart.resize();
             });
+
         } else {
             console.error("No se recibieron datos de la API para el hash proporcionado.");
         }

@@ -26,8 +26,45 @@ document.addEventListener('DOMContentLoaded', function () {
         // Forzar reflow para activar la animación
         void targetPanel.offsetWidth;
         targetPanel.classList.add('is-visible');
+
         if (target === 'stats') {
-          obtenerDatosDesdeAPI();
+          setTimeout(async () => {
+            try {
+              const data = await obtenerDatosDesdeAPI();
+
+              if (data) {
+              }
+            } catch (error) {
+              console.error("Error al cargar las estadísticas:", error);
+            }
+          }, 50);
+        }
+        if (target === 'stats-special') {
+          try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hashCorpus = urlParams.get('hash');
+
+            // Llamamos a la función que creamos en el paso anterior
+            // (Asegúrate de haber importado esta función al inicio de tu archivo)
+            inicializarTablaEspecifica(hashCorpus);
+
+          } catch (error) {
+            console.error("Error al cargar la tabla específica:", error);
+          }
+        }
+        if (target === 'viz') {
+          try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hashCorpus = urlParams.get('hash');
+
+            inicializarNubePalabras(hashCorpus);
+
+            // Forzamos un resize por si ECharts no detectó bien el tamaño
+            setTimeout(() => { if (wordCloudChart) wordCloudChart.resize(); }, 150);
+
+          } catch (error) {
+            console.error("Error al cargar la nube:", error);
+          }
         }
       }
     });
@@ -235,7 +272,6 @@ export async function obtenerDatosDesdeAPI(hashCorpus) {
   }
 
   try {
-    // 🔑 CORREGIDO: usar la misma clave que en login
     const token = localStorage.getItem("access_token");
 
     console.log("Token enviado:", token);
@@ -264,4 +300,169 @@ export async function obtenerDatosDesdeAPI(hashCorpus) {
     console.error("Error en la petición:", error);
     return null;
   }
+}
+
+/**
+ * Pide los datos específicos para la tabla al backend
+ */
+export async function obtenerDatosTablaDesdeAPI(hashCorpus, limite = 1000) {
+  if (!hashCorpus || hashCorpus === "undefined") {
+    const urlParams = new URLSearchParams(window.location.search);
+    hashCorpus = urlParams.get('hash');
+  }
+
+  if (!hashCorpus) return null;
+
+  try {
+    const token = localStorage.getItem("access_token");
+
+    // Llamamos al nuevo endpoint que creamos en Python
+    const response = await fetch(`/api/datos-hadoop/tabla/${hashCorpus}?limite=${limite}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status} al obtener la tabla`);
+    }
+
+    const result = await response.json();
+    return (result.status === 'success') ? result.data : null;
+
+  } catch (error) {
+    console.error("Error en la petición de la tabla:", error);
+    return null;
+  }
+}
+
+/**
+ * Recibe los datos y construye las filas de la tabla dinámicamente
+ */
+export function renderizarTablaEspecifica(datos) {
+  // Apuntamos al cuerpo de la tabla
+  const tbody = document.querySelector('#detailedStatsTable tbody');
+  if (!tbody) return;
+
+  // 1. Limpiamos las filas de ejemplo que pusiste en el HTML
+  tbody.innerHTML = '';
+
+  // 2. Validamos si hay datos
+  if (!datos || datos.length === 0) {
+    tbody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 20px; color: #888;">
+                    No se encontraron datos detallados para este corpus.
+                </td>
+            </tr>
+        `;
+    return;
+  }
+
+  // 3. Recorremos el JSON y creamos una fila por cada elemento
+  datos.forEach(fila => {
+    const tr = document.createElement('tr');
+
+    // Formateamos la frecuencia para que tenga comas (ej. 1,234)
+    const frecuenciaFormateada = fila.frecuencia ? fila.frecuencia.toLocaleString() : '0';
+
+    // Manejamos posibles valores vacíos en la morfología para que no diga "undefined"
+    const morfologia = fila.morfologia || '-';
+    const pos = fila.pos || 'Desconocido';
+
+    tr.innerHTML = `
+            <td><strong>${fila.token}</strong></td>
+            <td>${fila.lema}</td>
+            <td><span class="pos-badge">${pos}</span></td>
+            <td>${morfologia}</td>
+            <td>${frecuenciaFormateada}</td>
+        `;
+
+    tbody.appendChild(tr);
+  });
+}
+
+/**
+ * Función principal para orquestar la carga de la tabla
+ */
+export async function inicializarTablaEspecifica(hashCorpus) {
+  // Opcional: Puedes mostrar un mensaje de "Cargando..." aquí
+  const tbody = document.querySelector('#detailedStatsTable tbody');
+  if (tbody) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Cargando datos desde Hadoop...</td></tr>';
+  }
+
+  const datos = await obtenerDatosTablaDesdeAPI(hashCorpus, 200); // Traemos el top 200
+  renderizarTablaEspecifica(datos);
+}
+
+let wordCloudChart = null;
+
+export async function inicializarNubePalabras(hashCorpus) {
+  if (!hashCorpus) return;
+
+  try {
+    const token = localStorage.getItem("access_token");
+
+    // Llamamos al nuevo endpoint
+    const response = await fetch(`/api/datos-hadoop/nube/${hashCorpus}?limite=150`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (!response.ok) throw new Error("Error al cargar la nube");
+    const result = await response.json();
+
+    if (result.status === 'success' && result.data) {
+      renderizarNube(result.data);
+    }
+  } catch (error) {
+    console.error("Error renderizando nube:", error);
+  }
+}
+
+/**
+ * Dibuja la nube usando ECharts
+ */
+function renderizarNube(datosNube) {
+  const chartDom = document.getElementById('wordCloudChart');
+  if (!chartDom || !datosNube) return;
+
+  if (wordCloudChart) echarts.dispose(chartDom);
+  wordCloudChart = echarts.init(chartDom);
+
+  const option = {
+    tooltip: { show: true },
+    series: [{
+      type: 'wordCloud',
+      shape: 'circle', // Puedes cambiarlo a 'cardioid', 'diamond', 'triangle-forward'
+      keepAspect: false,
+      left: 'center',
+      top: 'center',
+      width: '90%',
+      height: '90%',
+      right: null,
+      bottom: null,
+      sizeRange: [12, 60], // Tamaño mínimo y máximo de las letras
+      rotationRange: [-45, 45], // Ángulos de rotación de las palabras
+      rotationStep: 45,
+      gridSize: 8,
+      drawOutOfBound: false,
+      layoutAnimation: true,
+      textStyle: {
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        // Color aleatorio para cada palabra basado en tu paleta
+        color: function () {
+          const colors = ['#8B2E16', '#2D5A3D', '#D9A05B', '#1A0F0A', '#3b5998'];
+          return colors[Math.floor(Math.random() * colors.length)];
+        }
+      },
+      emphasis: { focus: 'self', textStyle: { textShadowBlur: 10, textShadowColor: '#333' } },
+      data: datosNube
+    }]
+  };
+
+  wordCloudChart.setOption(option);
 }
