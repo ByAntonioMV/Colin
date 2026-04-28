@@ -73,18 +73,57 @@
                                 </tr>
                             </thead>
                             <tbody id="userTableBody">
-                                
+
                             </tbody>
                         </table>
                     </div>
                 </div>
 
                 <div id="roles-section" class="admin-pane">
-                    <div class="section-tag">Configuración</div>
-                    <h2>Gestión de Roles</h2>
-                    <p>Esta sección se encuentra actualmente en desarrollo.</p>
+                    <div class="admin-header-flex">
+                        <div>
+                            <div class="section-tag">Configuración</div>
+                            <h2>Gestión de Roles</h2>
+                        </div>
+                        <button class="btn-primary" id="openCreateRoleModal">
+                            <span>+</span> Nuevo Rol
+                        </button>
+                    </div>
+
+                    <div class="table-wrapper fade-in is-visible">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Rol</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="roleTableBody">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </main>
+        </div>
+
+        <div id="roleModal" class="login-modal">
+            <div class="login-box">
+                <div class="login-accent"></div>
+                <button class="close-modal" id="closeRoleModal" aria-label="Cerrar">&times;</button>
+                <div class="login-body">
+                    <h2 id="roleModalTitle">Nuevo Rol</h2>
+                    <p class="login-sub">Asigna un nombre para el nivel de acceso</p>
+
+                    <form id="roleForm" class="contact-form-styled">
+                        <div class="form-group">
+                            <label for="roleName">Nombre del Rol</label>
+                            <input type="text" id="roleName" placeholder="Ej. Editor, Revisor..." required>
+                        </div>
+                        <button type="submit" class="form-submit">Guardar Rol</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div id="userModal" class="login-modal">

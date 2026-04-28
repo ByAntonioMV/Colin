@@ -9,6 +9,7 @@ import os
 from App.API.Routes.RouteViews import router as views_router
 from App.API.Routes.AutenticacionRoute import router as auth_router
 from App.API.Routes.UsuarioRoutes import router as usuarios
+from App.API.Routes.RolesRoute import router as roles
 from App.API.Routes.CorpusRoute import router as corpus
 from App.API.Routes.DatosRoute import router as datos
 
@@ -42,6 +43,7 @@ app.mount("/Public", StaticFiles(directory="Public"), name="public")
 app.include_router(views_router)
 app.include_router(auth_router)
 app.include_router(usuarios)
+app.include_router(roles)
 app.include_router(corpus)
 app.include_router(datos)
 

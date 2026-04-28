@@ -26,16 +26,36 @@ class RolRepository:
     # 2. CREAR (Create)
     # ==========================================
     @staticmethod
-    def create_rol(db: Session, nombre: str):
-        """Crea un nuevo tipo de rol en el sistema"""
-        nuevo_rol = Rol(Nombre=nombre)
+    def create_rol(db: Session, rol_data: dict):
+        """Crea un nuevo tipo de rol en el sistema a partir de un diccionario"""
+        # Si tu modelo genera el IdRol automáticamente, solo pasamos el Nombre.
+        # Si prefieres mandarlo desde el Service, usa: IdRol=rol_data.get('id_rol')
+        nuevo_rol = Rol(
+            IdRol=rol_data.get('id_rol'), 
+            Nombre=rol_data['nombre']
+        )
         db.add(nuevo_rol)
         db.commit()
         db.refresh(nuevo_rol)
         return nuevo_rol
 
     # ==========================================
-    # 3. ELIMINAR (Delete)
+    # 3. ACTUALIZAR (Update) - ¡NUEVO!
+    # ==========================================
+    @staticmethod
+    def update_rol(db: Session, id_rol: str, datos: dict):
+        """Actualiza la información de un rol existente"""
+        rol = db.query(Rol).filter(Rol.IdRol == id_rol).first()
+        if rol:
+            if 'nombre' in datos:
+                rol.Nombre = datos['nombre']
+            
+            db.commit()
+            db.refresh(rol)
+        return rol
+
+    # ==========================================
+    # 4. ELIMINAR (Delete)
     # ==========================================
     @staticmethod
     def delete_rol(db: Session, id_rol: str):
@@ -48,7 +68,7 @@ class RolRepository:
         return False
 
     # ==========================================
-    # 4. VERIFICAR ROL DE USUARIO (La "Verdad" de la BD)
+    # 5. MANEJO DE RELACIONES USUARIO-ROL
     # ==========================================
     @staticmethod
     def user_has_rol(db: Session, id_usuario: str, nombre_rol: str) -> bool:

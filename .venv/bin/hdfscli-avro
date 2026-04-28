@@ -1,4 +1,4 @@
-#!/home/anthon/WorkSpace/Colin/.venv/bin/python
+#!/home/alain/WorkSpace/Colin/.venv/bin/python
 import sys
 from hdfs.ext.avro.__main__ import main
 if __name__ == '__main__':
