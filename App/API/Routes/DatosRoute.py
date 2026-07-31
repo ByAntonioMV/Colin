@@ -132,3 +132,18 @@ async def get_nube_palabras(
         return resultado
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+   
+@router.get("/nube/usuario/{hash_corpus}")
+async def get_nube_palabras(
+    hash_corpus: str, 
+    limite: int = 150,
+    db: Session = Depends(get_db)
+):
+    try:
+        resultado = DatosHadoopService.obtener_datos_nube(hash_corpus, limite)
+        if resultado.get("status") == "error":
+            return resultado
+        return resultado
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

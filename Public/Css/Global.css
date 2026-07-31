@@ -302,7 +302,7 @@ button {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('../../Public/Img/hero-oaxaca.jpg');
+  background-image: url('../Img/hero-oaxaca.jpg');
   background-size: cover;
   background-position: center;
   filter: brightness(0.35);
@@ -508,399 +508,6 @@ button {
   transform: translateY(0);
 }
 
-/* ===== VISUALIZACION ===== */
-.viz-section {
-  background-color: var(--oaxaca-cream);
-}
-
-.tab-bar {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-}
-
-.tab-btn {
-  padding: 12px 28px;
-  background-color: var(--oaxaca-sand);
-  color: var(--oaxaca-brown);
-  border: 2px solid transparent;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.tab-btn:hover,
-.tab-btn.tab-active {
-  background-color: var(--oaxaca-red);
-  color: var(--oaxaca-cream);
-  border-color: var(--oaxaca-red);
-}
-
-.tab-panel {
-  display: none;
-}
-
-.tab-panel.is-active {
-  display: block;
-}
-
-/* Tarjetas de lenguas */
-.lang-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.lang-card {
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--oaxaca-sand);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.lang-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(44, 24, 16, 0.1);
-}
-
-.lang-card-accent {
-  height: 4px;
-}
-
-.lang-card-body {
-  padding: 24px;
-}
-
-.lang-card h4 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: var(--oaxaca-dark);
-}
-
-.lang-card-family {
-  font-size: 13px;
-  color: var(--oaxaca-terracotta);
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.lang-card p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--oaxaca-brown);
-}
-
-.lang-card-stats {
-  display: flex;
-  gap: 24px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--oaxaca-sand);
-}
-
-.lang-card-stat strong {
-  font-size: 18px;
-  color: var(--oaxaca-dark);
-  display: block;
-}
-
-.lang-card-stat span {
-  font-size: 12px;
-  color: var(--oaxaca-brown);
-}
-
-/* Mapa */
-.map-visual {
-  text-align: center;
-}
-
-.map-visual img {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 16px;
-  border: 3px solid var(--oaxaca-sand);
-  margin: 0 auto;
-}
-
-.map-caption {
-  margin-top: 24px;
-  font-size: 15px;
-  color: var(--oaxaca-brown);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Timeline */
-.timeline {
-  max-width: 700px;
-  margin: 0 auto;
-  position: relative;
-  padding-left: 44px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 15px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: var(--oaxaca-sand);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -37px;
-  top: 4px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: var(--oaxaca-red);
-  border: 3px solid var(--oaxaca-cream);
-  box-shadow: 0 0 0 3px var(--oaxaca-red);
-}
-
-.timeline-year {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--oaxaca-red);
-  margin-bottom: 4px;
-}
-
-.timeline-item h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  margin-bottom: 6px;
-  color: var(--oaxaca-dark);
-}
-
-.timeline-item p {
-  font-size: 15px;
-  color: var(--oaxaca-brown);
-  line-height: 1.6;
-}
-
-/* ===== ESTADISTICAS ===== */
-.stats-section {
-  background-color: var(--oaxaca-dark);
-  color: var(--oaxaca-cream);
-  position: relative;
-  overflow: hidden;
-}
-
-.stats-section .greca-pattern {
-  opacity: 0.03;
-}
-
-.stats-section .section-tag {
-  background-color: rgba(201, 168, 76, 0.15);
-  color: var(--oaxaca-gold);
-}
-
-.stats-section .section-header h2 {
-  color: var(--oaxaca-cream);
-}
-
-.stats-section .section-header p {
-  color: rgba(232, 223, 208, 0.7);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 32px;
-  margin-bottom: 64px;
-}
-
-.stat-card {
-  text-align: center;
-  padding: 40px 24px;
-  border-radius: 16px;
-  background-color: rgba(250, 245, 237, 0.05);
-  border: 1px solid rgba(250, 245, 237, 0.08);
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.stat-card:hover {
-  background-color: rgba(250, 245, 237, 0.08);
-  transform: translateY(-4px);
-}
-
-.stat-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  background-color: rgba(201, 168, 76, 0.1);
-}
-
-.stat-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 800;
-  color: var(--oaxaca-gold);
-  margin-bottom: 8px;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 15px;
-  color: rgba(232, 223, 208, 0.7);
-}
-
-.stats-bars {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-
-.stats-bar-group h3 {
-  font-size: 22px;
-  margin-bottom: 24px;
-  color: var(--oaxaca-gold);
-}
-
-.bar-item {
-  margin-bottom: 20px;
-}
-
-.bar-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.bar-label span:last-child {
-  color: var(--oaxaca-gold);
-  font-weight: 700;
-}
-
-.bar-track {
-  height: 8px;
-  background-color: rgba(250, 245, 237, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  width: 0;
-  transition: width 1.5s ease;
-}
-
-@media (max-width: 768px) {
-  .stats-bars {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
-/* ===== DESCARGAS ===== */
-.downloads-section {
-  background-color: #F0E8D8;
-}
-
-.downloads-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px;
-}
-
-.download-card {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 32px;
-  border: 1px solid var(--oaxaca-sand);
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.download-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(44, 24, 16, 0.08);
-}
-
-.download-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.download-info h4 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--oaxaca-dark);
-}
-
-.download-info p {
-  font-size: 14px;
-  color: var(--oaxaca-brown);
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.download-meta {
-  display: flex;
-  gap: 16px;
-  font-size: 12px;
-  color: var(--oaxaca-terracotta);
-  font-weight: 600;
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  background-color: var(--oaxaca-forest);
-  color: var(--oaxaca-cream);
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: none;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
-
-.download-btn:hover {
-  background-color: #367A4F;
-}
-
-@media (max-width: 420px) {
-  .downloads-grid {
-    grid-template-columns: 1fr;
-  }
-  .download-card {
-    flex-direction: column;
-  }
-}
-
 /* ===== ACERCA DE ===== */
 .about-section {
   background-color: var(--oaxaca-cream);
@@ -991,6 +598,247 @@ button {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+}
+
+/* ===================================================
+   ===== NUEVO: SECCION CONOCIMIENTOS / INFORMACION =====
+   =================================================== */
+.knowledge-section {
+  background-color: var(--oaxaca-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tarjetas de conceptos clave */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin-bottom: 80px;
+}
+
+.concept-card {
+  background-color: #fff;
+  border: 1px solid var(--oaxaca-sand);
+  border-radius: 16px;
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.concept-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--accent, var(--oaxaca-red));
+}
+
+.concept-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(44, 24, 16, 0.12);
+}
+
+.concept-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  background-color: rgba(201, 168, 76, 0.12);
+  color: var(--accent, var(--oaxaca-red));
+}
+
+.concept-icon .material-symbols-outlined {
+  font-size: 32px;
+}
+
+.concept-card h3 {
+  font-size: 24px;
+  color: var(--oaxaca-dark);
+  margin-bottom: 12px;
+}
+
+.concept-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--oaxaca-brown);
+  margin-bottom: 18px;
+}
+
+/* Ejemplo dentro de la tarjeta de concepto */
+.concept-example {
+  background-color: var(--oaxaca-cream);
+  border: 1px dashed var(--oaxaca-sand);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--oaxaca-brown);
+}
+
+.concept-example strong {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--oaxaca-terracotta);
+  margin-bottom: 8px;
+}
+
+.token-chip {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid var(--oaxaca-sand);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin: 3px 4px 3px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--oaxaca-dark);
+}
+
+.lemma-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.lemma-row .arrow {
+  color: var(--oaxaca-gold);
+  font-weight: 700;
+}
+
+.lemma-row em {
+  color: var(--oaxaca-red);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ===== DIAGRAMA DE BLOQUES ===== */
+.diagram-wrapper {
+  background-color: #fff;
+  border: 1px solid var(--oaxaca-sand);
+  border-radius: 20px;
+  padding: 48px 32px;
+  box-shadow: 0 8px 30px rgba(44, 24, 16, 0.05);
+}
+
+.diagram-title {
+  text-align: center;
+  font-size: 26px;
+  color: var(--oaxaca-dark);
+  margin-bottom: 8px;
+}
+
+.diagram-subtitle {
+  text-align: center;
+  font-size: 15px;
+  color: var(--oaxaca-brown);
+  max-width: 620px;
+  margin: 0 auto 44px;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.flow-step {
+  flex: 1 1 150px;
+  max-width: 200px;
+  background-color: var(--oaxaca-cream);
+  border: 2px solid var(--oaxaca-sand);
+  border-radius: 14px;
+  padding: 22px 18px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.flow-step:hover {
+  transform: translateY(-4px);
+  border-color: var(--oaxaca-gold);
+}
+
+.flow-step .step-num {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--oaxaca-red);
+  color: var(--oaxaca-cream);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-step .step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(139, 46, 22, 0.08);
+  color: var(--oaxaca-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px auto 14px;
+}
+
+.flow-step .step-icon .material-symbols-outlined {
+  font-size: 26px;
+}
+
+.flow-step h4 {
+  font-size: 16px;
+  color: var(--oaxaca-dark);
+  margin-bottom: 6px;
+}
+
+.flow-step p {
+  font-size: 12.5px;
+  color: var(--oaxaca-brown);
+  line-height: 1.5;
+}
+
+/* Flecha entre bloques */
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--oaxaca-gold);
+  flex: 0 0 40px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .flow-step {
+    max-width: 320px;
+    width: 100%;
+  }
+  .flow-arrow {
+    transform: rotate(90deg);
+    padding: 6px 0;
   }
 }
 
@@ -1270,22 +1118,6 @@ button {
 
 .login-submit:hover {
   background-color: var(--oaxaca-red-hover);
-}
-
-.login-footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: var(--oaxaca-brown);
-}
-
-.login-footer a {
-  color: var(--oaxaca-red);
-  font-weight: 600;
-}
-
-.login-footer a:hover {
-  text-decoration: underline;
 }
 
 .close-modal {

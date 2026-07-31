@@ -54,6 +54,16 @@ async def listar_corpus(
     # que llame a CorpusRepository.get_all_corpus(db)
     return CorpusService.obtener_todos(db)
 
+
+@router.get("/listar/usuario")
+async def listar_corpus(
+    db: Session = Depends(get_db),
+):
+    """Obtiene la lista de todos los corpus para tu tabla HTML"""
+    # Aquí asumo que crearás un método 'obtener_todos' en tu CorpusService
+    # que llame a CorpusRepository.get_all_corpus(db)
+    return CorpusService.obtener_todos(db)
+
 # ==========================================
 # ELIMINAR CORPUS
 # ==========================================

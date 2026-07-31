@@ -129,7 +129,135 @@
 
   <div class="zapotec-border"></div>
 
+  <!-- ========== NUEVA SECCION: CONOCIMIENTOS / INFORMACION ========== -->
+  <section class="section knowledge-section" id="conocimientos">
+    <div class="greca-pattern"></div>
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Conocimientos</div>
+        <h2>Conceptos Clave para Entender la Plataforma</h2>
+        <p>
+          Construir un corpus digital implica algunos conceptos del procesamiento de lenguaje.
+          Aquí te explicamos de forma sencilla qué significan y cómo los usamos para preservar
+          las lenguas de Oaxaca.
+        </p>
+      </div>
 
+      <!-- Tarjetas de conceptos -->
+      <div class="concept-grid">
+        <article class="concept-card fade-in" style="--accent: var(--oaxaca-red);">
+          <div class="concept-icon"><span class="material-symbols-outlined">library_books</span></div>
+          <h3>¿Qué es un Corpus Digital?</h3>
+          <p>
+            Sinclair (1996), fundador de uno de los corpus más grandes del mundo, 
+            "The Bank of English", establece que el corpus es una colección de 
+            fragmentos de lengua seleccionados y ordenados conforme a criterios lingüísticos 
+            explícitos, con el propósito de ser utilizados como muestras representativas de 
+            dicha lengua.
+          </p>
+          <div class="concept-example">
+            <strong>Ejemplo</strong>
+            Miles de cuentos, conversaciones y documentos en zapoteco reunidos y etiquetados
+            para poder buscarlos y estudiarlos.
+          </div>
+        </article>
+
+        <article class="concept-card fade-in" style="--accent: var(--oaxaca-forest);">
+          <div class="concept-icon"><span class="material-symbols-outlined">content_cut</span></div>
+          <h3>¿Qué es la Tokenización?</h3>
+          <p>
+            Canelo et al. (2024), la tokenización consiste en transformar las palabras a su forma raíz o lema
+            es el proceso de dividir un texto en unidades más
+            pequeñas llamadas <em>tokens</em> (normalmente palabras o signos). Es el primer paso
+            para que la computadora pueda contar, analizar y procesar la lengua.
+          </p>
+          <div class="concept-example">
+            <strong>Ejemplo</strong>
+            <span style="display:block; margin-bottom:8px;">"Padiuxi, ¿ximodo nuu lii?"</span>
+            <span class="token-chip">Padiuxi</span>
+            <span class="token-chip">,</span>
+            <span class="token-chip">ximodo</span>
+            <span class="token-chip">nuu</span>
+            <span class="token-chip">lii</span>
+            <span class="token-chip">?</span>
+          </div>
+        </article>
+
+        <article class="concept-card fade-in" style="--accent: var(--oaxaca-terracotta);">
+          <div class="concept-icon"><span class="material-symbols-outlined">account_tree</span></div>
+          <h3>¿Qué es la Lematización?</h3>
+          <p>
+            La <strong>lematización</strong> reduce cada palabra a su forma base o de diccionario,
+            llamada <em>lema</em>. Así, distintas formas de una misma palabra se agrupan, lo que
+            facilita contar y analizar el vocabulario real de la lengua.
+          </p>
+          <div class="concept-example">
+            <strong>Ejemplo</strong>
+            <div class="lemma-row"><span>corriendo, corrió, corremos</span><span
+                class="arrow">&rarr;</span><em>correr</em></div>
+            <div class="lemma-row"><span>casas, casita, casas</span><span class="arrow">&rarr;</span><em>casa</em></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Diagrama de bloques -->
+      <div class="diagram-wrapper fade-in">
+        <h3 class="diagram-title">¿Cómo funciona la plataforma?</h3>
+        <p class="diagram-subtitle">
+          Este es el flujo que sigue cada texto desde que es recopilado en la comunidad hasta que
+          se convierte en una visualización dentro del dashboard.
+        </p>
+
+        <div class="flow">
+          <div class="flow-step">
+            <span class="step-num">1</span>
+            <div class="step-icon"><span class="material-symbols-outlined">record_voice_over</span></div>
+            <h4>Recopilación</h4>
+            <p>Se reúnen textos y audios de hablantes y documentos de la lengua.</p>
+          </div>
+
+          <div class="flow-arrow">&rarr;</div>
+
+          <div class="flow-step">
+            <span class="step-num">2</span>
+            <div class="step-icon"><span class="material-symbols-outlined">cleaning_services</span></div>
+            <h4>Digitalización</h4>
+            <p>El material se transcribe y limpia para guardarlo en formato digital.</p>
+          </div>
+
+          <div class="flow-arrow">&rarr;</div>
+
+          <div class="flow-step">
+            <span class="step-num">3</span>
+            <div class="step-icon"><span class="material-symbols-outlined">content_cut</span></div>
+            <h4>Tokenización</h4>
+            <p>El texto se separa en palabras y unidades mínimas (tokens).</p>
+          </div>
+
+          <div class="flow-arrow">&rarr;</div>
+
+          <div class="flow-step">
+            <span class="step-num">4</span>
+            <div class="step-icon"><span class="material-symbols-outlined">account_tree</span></div>
+            <h4>Lematización</h4>
+            <p>Cada token se lleva a su forma base para agrupar el vocabulario.</p>
+          </div>
+
+          <div class="flow-arrow">&rarr;</div>
+
+          <div class="flow-step">
+            <span class="step-num">5</span>
+            <div class="step-icon"><span class="material-symbols-outlined">insights</span></div>
+            <h4>Visualización</h4>
+            <p>Los datos se muestran en nubes de palabras y estadísticas del dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="zapotec-border"></div>
+  <!-- ========== DASHBOARD ========== -->
   <!-- ========== DASHBOARD ========== -->
   <section class="dashboard-section" id="dashboard">
     <div class="dashboard-container">
@@ -138,21 +266,22 @@
         <div class="sidebar-header">
           <span class="nav-logo-sub">Panel de Control</span>
           <select class="lang-selector" id="langSelect">
-            <option value="nahuatl">Náhuatl</option>
             <option value="zapoteco">Zapoteco</option>
             <option value="mixteco">Mixteco</option>
+            <option value="mazateco">Mazateco</option>
+            <option value="mixe">Mixe</option>
           </select>
         </div>
 
         <nav class="dash-nav">
+          <button class="dash-nav-btn" data-section="info-content">
+            <span class="material-symbols-outlined dash-icon">menu_book</span> Información
+          </button>
           <button class="dash-nav-btn active" data-section="viz-content">
             <span class="material-symbols-outlined dash-icon">monitoring</span> Visualización
           </button>
           <button class="dash-nav-btn" data-section="stats-content">
             <span class="material-symbols-outlined dash-icon">leaderboard</span> Estadísticas
-          </button>
-          <button class="dash-nav-btn" data-section="dl-content">
-            <span class="material-symbols-outlined dash-icon">download</span> Descargas
           </button>
         </nav>
       </aside>
@@ -160,20 +289,95 @@
       <main class="dash-main-content">
         <div class="greca-pattern"></div>
 
+        <div id="info-content" class="dash-pane">
+          <div class="section-tag">Información de la lengua</div>
+
+          <!-- Encabezado de la lengua -->
+          <div class="lang-info-header">
+            <div class="lang-emblem">Za</div>
+            <div class="lang-meta">
+              <h3>Zapoteco <span style="font-weight:400; font-size:18px; color:var(--oaxaca-gold);">/ Diidxazá</span>
+              </h3>
+              <span class="lang-family-tag">Familia Otomangue &middot; Oaxaca, México</span>
+            </div>
+          </div>
+
+          <!-- Datos rapidos -->
+          <div class="lang-facts-grid">
+            <div class="lang-fact">
+              <span class="fact-icon"><span class="material-symbols-outlined">groups</span></span>
+              <div class="fact-value">490,845</div>
+              <div class="fact-label">Hablantes (aprox.)</div>
+            </div>
+            <div class="lang-fact">
+              <span class="fact-icon"><span class="material-symbols-outlined">forum</span></span>
+              <div class="fact-value">62</div>
+              <div class="fact-label">Variantes lingüísticas</div>
+            </div>
+            <div class="lang-fact">
+              <span class="fact-icon"><span class="material-symbols-outlined">public</span></span>
+              <div class="fact-value">7</div>
+              <div class="fact-label">Regiones donde se habla</div>
+            </div>
+            <div class="lang-fact">
+              <span class="fact-icon"><span class="material-symbols-outlined">database</span></span>
+              <div class="fact-value">128,400</div>
+              <div class="fact-label">Tokens en el corpus</div>
+            </div>
+          </div>
+
+          <!-- Descripcion + ficha tecnica -->
+          <div class="lang-detail-grid">
+            <div class="lang-detail-block">
+              <h4><span class="material-symbols-outlined">description</span> Descripción</h4>
+              <p>
+                El <strong>zapoteco</strong> (autodenominado <em>Diidxazá</em>, "lengua de las nubes")
+                es una de las lenguas indígenas con mayor número de hablantes en Oaxaca. Pertenece a
+                la familia otomangue y se caracteriza por ser una lengua tonal, donde el significado
+                de una palabra cambia según la altura y el contorno de la voz. Tiene una larga tradición
+                escrita que se remonta a la época prehispánica, presente en los códices y en las
+                inscripciones de Monte Albán.
+              </p>
+            </div>
+            <div class="lang-detail-block">
+              <h4><span class="material-symbols-outlined">fact_check</span> Ficha técnica</h4>
+              <ul class="lang-data-list">
+                <li><span>Nombre nativo</span><span>Diidxazá</span></li>
+                <li><span>Familia</span><span>Otomangue</span></li>
+                <li><span>Tipo</span><span>Tonal</span></li>
+                <li><span>Región principal</span><span>Istmo y Valles Centrales</span></li>
+                <li><span>Sistema de escritura</span><span>Alfabeto latino</span></li>
+                <li><span>Vitalidad</span>
+                  <span><span class="vitality-badge riesgo dot">En riesgo</span></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Banner de importancia del corpus -->
+          <div class="corpus-importance">
+            <div class="imp-icon"><span class="material-symbols-outlined">volunteer_activism</span></div>
+            <div>
+              <h4>¿Por qué construir un corpus digital de esta lengua?</h4>
+              <p>
+                Documentar el zapoteco en un corpus digital permite preservar su vocabulario, gramática
+                y formas de uso reales antes de que se pierdan con el desplazamiento lingüístico. Cada
+                texto recopilado se convierte en material para crear diccionarios, herramientas educativas,
+                traductores automáticos y recursos que las nuevas generaciones puedan usar para
+                revitalizar y transmitir su lengua materna.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div id="viz-content" class="dash-pane active">
           <div class="section-tag">Visualización</div>
-          <h2>Panel de Lengua: Náhuatl</h2>
-          <p>Holas como estas </p>
+          <div id="wordCloud" style="width: 100%; height: 500px;"></div>
         </div>
 
         <div id="stats-content" class="dash-pane">
           <div class="section-tag">Estadísticas</div>
-          <h2>Análisis de Datos</h2>
-        </div>
-
-        <div id="dl-content" class="dash-pane">
-          <div class="section-tag">Descargas</div>
-          <h2>Repositorio de Recursos</h2>
+          <div id="statsChart" style="width: 100%; height: 480px;"></div>
         </div>
       </main>
     </div>
@@ -260,7 +464,7 @@
               </div>
               <div>
                 <strong>Ubicación de la institución</strong>
-                <span>Carretera Teotitlán - San Antonio Nanahuatipán Km 1.7 s/n. 
+                <span>Carretera Teotitlán - San Antonio Nanahuatipán Km 1.7 s/n.
                   Paraje Titlacuatitla. Teotitlán de Flores Magón, Oax. México, C.P. 68540</span>
               </div>
             </div>
@@ -409,6 +613,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
   <script src="../../Public/Js/Global.js?v=1.0"></script>
   <script src="../../Public/Js/Dashboard.js?v=1.0"></script>
 </body>
